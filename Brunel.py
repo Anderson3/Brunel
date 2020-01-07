@@ -1,5 +1,5 @@
 
-import sys
+import sys, os
 import math
 from openpyxl import load_workbook
 
@@ -8,8 +8,22 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QVBo
 from PyQt5.QtGui import QPixmap, QIcon, QImage
 from PyQt5 import QtWidgets, QtGui
 
+
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
 #--------------------------------------
-caminho = 'tabela_gerdau.xlsx'
+caminho = resource_path('tabela_gerdau.xlsx')
 arquivo_excel = load_workbook(caminho)
 
 planilha = arquivo_excel['Plan1']
@@ -42,12 +56,12 @@ class Aplicacao(QMainWindow):
 		self.load_ui()
 		self.load_signals()
 		self.setWindowTitle('BRUNEL - verificação de barras metálicas laminadas perfil I e H')
-		self.setWindowIcon(QtGui.QIcon('icone_brunel.png'))
+		self.setWindowIcon(QtGui.QIcon(resource_path(resource_path('imagens/icone_brunel.png'))))
 
 		self.setFixedSize(590, 495)
 
 	def load_ui(self):
-		self.ui = loadUi('main_ui.ui',self)
+		self.ui = loadUi(resource_path('main_ui.ui'),self)
 
 		self.carregar_init_dados()
 
@@ -92,9 +106,9 @@ class Aplicacao(QMainWindow):
 
 	def info_central(self):
 		msg = QMessageBox()
-		msg.setWindowIcon(QtGui.QIcon('icone_brunel.png'))
+		msg.setWindowIcon(QtGui.QIcon(resource_path("imagens/icone_brunel.png")))
 
-		pixmap = QPixmap("./logo_a3_mini_l.png")
+		pixmap = QPixmap(resource_path("imagens/logo_a3_mini_l.png"))
 		msg.setIconPixmap(pixmap)
 		#msg.setIcon(QMessageBox.Information)
 		msg.setText('BRUNEL <i>    -v. beta</i>at. 07.2019 <hr> Desenvolvido por Anderson Alves de Aguiar<br> (Acadêmico de Engenharia Civil)<br>- andersonalvesmath@hotmail.com')
@@ -848,10 +862,10 @@ class EsquemaApoios(QMainWindow):
 		label_img = QtWidgets.QLabel(self)
 		label_img.resize(350,183)
 		#label_img.setStyleSheet('background-color: red;')
-		label_img.setPixmap(QtGui.QPixmap('condicoes_apoio.png'))
+		label_img.setPixmap(QtGui.QPixmap(resource_path('imagens/condicoes_apoio.png')))
 		label_img.setScaledContents(True)
 
-		self.setWindowIcon(QtGui.QIcon('icone_brunel.png'))
+		self.setWindowIcon(QtGui.QIcon(resource_path('imagens/brunel_icone.ico')))
 		self.setFixedSize(350,183)
 
 class EsquemaCb(QMainWindow):
@@ -862,10 +876,10 @@ class EsquemaCb(QMainWindow):
 		label_img = QtWidgets.QLabel(self)
 		label_img.resize(280,126)
 		#label_img.setStyleSheet('background-color: red;')
-		label_img.setPixmap(QtGui.QPixmap('fator_modificacao.png'))
+		label_img.setPixmap(QtGui.QPixmap(resource_path('imagens/fator_modificacao.png')))
 		label_img.setScaledContents(True)
 
-		self.setWindowIcon(QtGui.QIcon('icone_brunel.png'))
+		self.setWindowIcon(QtGui.QIcon(resource_path('imagens/brunel_icone.ico')))
 		self.setFixedSize(280,126)
 
 
