@@ -1,0 +1,4 @@
+numpy==1.18.0
+openpyxl==3.0.2
+PyQt5==5.11.3
+PyQt5-sip==4.19.19
