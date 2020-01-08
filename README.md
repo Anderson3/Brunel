@@ -63,4 +63,3 @@ Na aba "Cortante" a barra é calculada para o esforço de cisamento, sendo neces
 Anderson Alves de Aguiar – [@Andersonmath97](https://twitter.com/@Andersonmath97) – andersonalvesmath@hotmail.com
 
 [https://github.com/Anderson3/Brunel](https://github.com/Anderson3/Brunel)
-
