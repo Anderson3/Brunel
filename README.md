@@ -13,15 +13,24 @@ OS X & Linux:
 1 - Download dos arquivos
       https://github.com/Anderson3/Brunel/archive/master.zip
     
-2 - Descompacte-os e execute o código em Python
+2 - Descompacte-os e instale as bibliotecas necessárias para execução
+      pip install requirements.txt  
+      
+3 - Execute o código do Brunel em Python
       python Brunel.py
 ```
 
 Windows:
 
 ```sh
-1 - Download do arquivo execultável 
+1 - Download do arquivo execultável em um arquivo [onefile]
       https://github.com/Anderson3/Brunel/raw/master/Brunel.exe
+
+ou
+
+1 - Download do arquivo execultável com diretórios [dir]
+      https://github.com/Anderson3/Brunel/raw/master/Brunel.exe
+
 ```
 
 ## Funcionamento da aplação
