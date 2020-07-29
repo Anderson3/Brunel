@@ -58,6 +58,7 @@ ou
 
 ## Exemplo de utilização
 
+- Exemplo Cálculo efetuado para as solicitações de Momento Fletor na viga metálica. Exemplo 6.3 - CHAMBERLAIN, FICANHA, FABEANE. Projeto e cálculo de estruturas de aço: edifício industrial detalhado. Rio de Janeiro: Elsevier, 2013
 <p align="center"><img src="exemplos/brunel_demonstracao.gif" width="500"></p>
 
 ## Meta
