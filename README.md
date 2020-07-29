@@ -52,7 +52,7 @@ Na aba "Momento Fletor" são testadas as condições de barras metálicas para a
 
 Na aba "Cortante" a barra é calculada para o esforço de cisamento, sendo necessários os dados da força cortante de projeto [Vd] e a existência de enrijecedores utilizados para melhoramento resistivo, para o caso da ocorrência de enrijecedores o Brunel requerirá a distância adotada entre os mesmo para contabilização de cálculo. Ao final a barra é testada para o esforço cortante.
 <p align="center">
-<img src="exemplos/brunel_cisalhamento.png" width="350">
+<img src="exemplos/brunel_demonstracao_n.gif" width="350">
 </p>
  
 
