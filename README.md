@@ -33,7 +33,7 @@ ou
 
 ```
 
-## Funcionamento da aplação
+## Funcionamento da aplicação
 
 Na aba "Dados" devem ser definidos os tipos de perfil metálico usado em estudo, bem como também as propriedades mecânicas relacionadas. O Brunel apresenta opções de todos os tipos de perfis metálicos da Gerdau e propriedades usuais. Para cada tipo de perfil são carregados todas as informações inerentes e necessárias para cálculo. Sendo que o perfil escolhido nessa seção será o utilizado para calcular todos os casos de solicitação.
 <p align="center">
@@ -57,6 +57,8 @@ Na aba "Cortante" a barra é calculada para o esforço de cisamento, sendo neces
  
 
 ## Exemplo de utilização
+
+<img align="center" src="exemplos/brunel_inicio.png" width="450">
 
 ## Meta
 
