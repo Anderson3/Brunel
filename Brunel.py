@@ -1,14 +1,26 @@
+#!/usr/bin/python
+
 
 import sys, os
 import math
 from openpyxl import load_workbook
+#import threading
 
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QVBoxLayout, QHBoxLayout, QDialog, QMessageBox
 from PyQt5.QtGui import QPixmap, QIcon, QImage
 from PyQt5 import QtWidgets, QtGui
 
+import trimesh
+from trimesh.viewer import windowed
 
+# inicialização de variáveis globais, responsáveis pela determinação dos modelos 3D apresentados quando clicados 'Configurações dos Modelos', na aba de Momento Fletor.
+global model_flt
+global model_flm
+global model_fla
+model_flt = 'normal'
+model_flm = 'normal'
+model_fla = 'normal'
 
 
 def resource_path(relative_path):
@@ -102,6 +114,20 @@ class Aplicacao(QMainWindow):
 
 		#self.pushButton_8.clicked.connect(self.abaInformacao)
 		self.pushButton_8.clicked.connect(self.info_central)
+
+		 #---- Seção de botões adicionados para revelar os modelos 3d relacionados --------
+		self.pushButton_10.clicked.connect(lambda: self.abrir_modelo_3d('flt'))
+		self.pushButton_11.clicked.connect(lambda: self.abrir_modelo_3d('flm'))
+		self.pushButton_12.clicked.connect(lambda: self.abrir_modelo_3d('fla'))
+
+		#----- modificação: troquei o fluxo unitário para paralelo com threadins, já que o trimesh custava um pouco a executar ----
+		#t1 = threading.Thread(target=self.abrir_modelo_3d, args=('flt',))
+		#t2 = threading.Thread(target=self.abrir_modelo_3d, args=('flm',))
+		#t3 = threading.Thread(target=self.abrir_modelo_3d, args=('fla',))
+		#self.pushButton_10.clicked.connect(lambda: t1.start())
+		#self.pushButton_11.clicked.connect(lambda: t2.start())
+		#self.pushButton_12.clicked.connect(lambda: t3.start())
+		
 
 
 	def info_central(self):
@@ -244,6 +270,7 @@ class Aplicacao(QMainWindow):
 
 #---TELA FLA -------------------------------------------------------------------------------
 	def calcular_fla(self):
+		global model_fla
 		momento = self.lineEdit_38.text()
 		comprimt = self.lineEdit_48.text()
 		if momento == '' or comprimt == '' or momento.isdigit() == False or comprimt.isdigit() == False :
@@ -320,9 +347,11 @@ class Aplicacao(QMainWindow):
 			if float(momento) <= mrd:
 				self.label_187.setText('OK --- Msd <= Mrd')
 				self.label_187.setStyleSheet('color: green')
+				model_fla = 'normal' #----não é extamente necessário
 			else:
 				self.label_187.setText('ERRO --- Msd > Mrd')
 				self.label_187.setStyleSheet('color: red')
+				model_fla = 'fla'
 
 	def limpa_momento(self):
 		self.lineEdit_46.setText('')
@@ -363,6 +392,7 @@ class Aplicacao(QMainWindow):
 
 #---TELA FLM -------------------------------------------------------------------------------
 	def calcular_flm(self):
+		global model_flm
 		momento = self.lineEdit_38.text()
 		comprimt = self.lineEdit_48.text()
 		if momento == '' or comprimt == '' or momento.isdigit() == False or comprimt.isdigit() == False :
@@ -437,9 +467,11 @@ class Aplicacao(QMainWindow):
 			if float(momento) <= mrd:
 				self.label_186.setText('OK --- Msd <= Mrd')
 				self.label_186.setStyleSheet('color: green')
+				model_flm = 'normal' #----não é extamente necessário
 			else:
 				self.label_186.setText('ERRO --- Msd > Mrd')
 				self.label_186.setStyleSheet('color: red')
+				model_flm = 'flm'
 
 #----------------------------------------------------------------------------------
 
@@ -448,6 +480,7 @@ class Aplicacao(QMainWindow):
 
 #---TELA FLT -------------------------------------------------------------------------------
 	def calcular_flt(self):
+		global model_flt
 		momento_flt = self.lineEdit_38.text()
 		comprimt = self.lineEdit_48.text()
 		if momento_flt == '' or comprimt == '' or momento_flt.isdigit() == False or comprimt.isdigit() == False :
@@ -531,9 +564,11 @@ class Aplicacao(QMainWindow):
 			if float(momento_flt) <= mrd:
 				self.label_53.setText('OK --- Msd <= Mrd')
 				self.label_53.setStyleSheet('color: green')
+				model_flt = 'normal' #----não é extamente necessário
 			else:
 				self.label_53.setText('ERRO --- Msd > Mrd')
 				self.label_53.setStyleSheet('color: red')
+				model_flt = 'flt'
 
 #----------------------------------------------------------------------------------'''
 
@@ -631,8 +666,35 @@ class Aplicacao(QMainWindow):
 	def salvar_normal(self):
 			QMessageBox.about(self, "Atenção","Sou um Botão sem função implementada. Peça pro Anderson terminar essa função logo, já to entediado :)\n")
 
-#----------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 
+	def abrir_modelo_3d(self, caso):
+		#--- importação do Trimesh, para renderização 3D ---------
+		#import trimesh
+		#from trimesh.viewer import windowed
+
+		global model_flt
+		global model_flm
+		global model_fla
+
+		if caso == 'fla' and model_fla == 'fla':
+			model = 'modelos/fla.obj'
+			print('Modelo 3d inicializado - FLA')
+		elif caso == 'flm' and model_flm == 'flm':
+			model = 'modelos/flm.obj'
+			print('Modelo 3d inicializado - FLM')
+		elif caso == 'flt' and model_flt == 'flt':
+			model = 'modelos/flt1.obj'
+			print('Modelo 3d inicializado - FLT')
+		else:
+			model = 'modelos/viga_normal.obj'
+			print('Modelo 3d inicializado - Viga Normal')
+
+		mesh = trimesh.load_mesh(model)
+		window = windowed.SceneViewer(mesh, resolution=(700,450), visible=True)
+
+
+#-----------------------------------------------------------------------------------------------------------------------
 
 	def carregar_init_dados(self):
 		print('programa inicializado ...') #--------------------------------------------retirar isso futuramente------
