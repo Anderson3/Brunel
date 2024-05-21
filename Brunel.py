@@ -83,7 +83,7 @@ class Aplicacao(QMainWindow):
 
 		self.label_93.setStyleSheet("Background-Color: #ddebff;")
 		self.label_94.setToolTip('LAEC - Liga Acadêmica de Engenharia Civil \n/ Centro Acadêmico Alberto Silva')
-		self.label_95.setToolTip('Isambard Kingdom Brunel (1806-1859), \nfoi engenheiro, arquiteto e inventor. \nConsiderado um dos que maiores \nnomes do séc. XIX.')  
+		self.label_95.setToolTip('Isambard Kingdom Brunel (1806-1859), \nfoi engenheiro, arquiteto e inventor. \nConsiderado um dos maiores \nnomes do séc. XIX.')  
 
 		#self.pushButton_8.setStyleSheet("Background: url('logo_info_mini.png')")
 
